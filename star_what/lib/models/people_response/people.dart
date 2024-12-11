@@ -11,7 +11,7 @@ class People {
   String? gender;
   String? homeworld;
   List<String>? films;
-  List<dynamic>? species;
+  List<String>? species;
   List<String>? vehicles;
   List<String>? starships;
   DateTime? created;
@@ -47,10 +47,17 @@ class People {
         birthYear: data['birth_year'] as String?,
         gender: data['gender'] as String?,
         homeworld: data['homeworld'] as String?,
-        films: data['films'] as List<String>?,
-        species: data['species'] as List<dynamic>?,
-        vehicles: data['vehicles'] as List<String>?,
-        starships: data['starships'] as List<String>?,
+        films:
+            (data['films'] as List<dynamic>?)?.map((e) => e as String).toList(),
+        species: (data['species'] as List<dynamic>?)
+            ?.map((e) => e as String)
+            .toList(),
+        vehicles: (data['vehicles'] as List<dynamic>?)
+            ?.map((e) => e as String)
+            .toList(),
+        starships: (data['starships'] as List<dynamic>?)
+            ?.map((e) => e as String)
+            .toList(),
         created: data['created'] == null
             ? null
             : DateTime.parse(data['created'] as String),
@@ -79,15 +86,9 @@ class People {
         'url': url,
       };
 
-  /// `dart:convert`
-  ///
-  /// Parses the string and returns the resulting Json object as [Result].
   factory People.fromJson(String data) {
     return People.fromMap(json.decode(data) as Map<String, dynamic>);
   }
 
-  /// `dart:convert`
-  ///
-  /// Converts [Result] to a JSON string.
   String toJson() => json.encode(toMap());
 }
