@@ -14,9 +14,9 @@ class ListaHorizontal extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
+            const SizedBox(
               width: 300,
-              child: const Column(
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
@@ -34,12 +34,12 @@ class ListaHorizontal extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 60),
-            Container(
+            SizedBox(
               height: 500,
               child: ListView(
                 scrollDirection: Axis.horizontal,
                 children: [
-                  Container(
+                  SizedBox(
                     width: 150,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -69,7 +69,7 @@ class ListaHorizontal extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(width: 10),
-                  Container(
+                  SizedBox(
                     width: 150,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -99,7 +99,7 @@ class ListaHorizontal extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(width: 10),
-                  Container(
+                  SizedBox(
                     width: 150,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
