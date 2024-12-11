@@ -35,7 +35,6 @@ class ListaHorizontal extends StatelessWidget {
             ),
             const SizedBox(height: 60),
             SizedBox(
-              height: 500,
               child: ListView(
                 scrollDirection: Axis.horizontal,
                 children: [
