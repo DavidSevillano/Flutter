@@ -48,7 +48,6 @@ class ListaHorizontal extends StatelessWidget {
                           borderRadius: BorderRadius.circular(65),
                           child: Image.network(
                             "https://media.themoviedb.org/t/p/w235_and_h235_face/xak9L0fkIOkjSwJpz3SWLl94tVP.jpg",
-                            width: 150,
                             height: 400,
                             fit: BoxFit.cover,
                           ),
@@ -78,7 +77,6 @@ class ListaHorizontal extends StatelessWidget {
                           borderRadius: BorderRadius.circular(65),
                           child: Image.network(
                             "https://media.themoviedb.org/t/p/w235_and_h235_face/3Xm4zDO3gUVU4OWZnhb983GnEGx.jpg",
-                            width: 150,
                             height: 400,
                             fit: BoxFit.cover,
                           ),
@@ -108,7 +106,6 @@ class ListaHorizontal extends StatelessWidget {
                           borderRadius: BorderRadius.circular(65),
                           child: Image.network(
                             "https://media.themoviedb.org/t/p/w235_and_h235_face/UQsBo3oeK5aw9tNHpLA2XKrgQt.jpg",
-                            width: 150,
                             height: 400,
                             fit: BoxFit.cover,
                           ),
