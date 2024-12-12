@@ -226,11 +226,12 @@ Widget getCharacterData(
                         decoration: const BoxDecoration(
                           gradient: LinearGradient(
                             begin: Alignment.bottomCenter,
-                            end: Alignment.topCenter,
+                            end: Alignment.center,
                             colors: <Color>[
-                              Colors.black,
-                              Colors.black12,
-                              Colors.black45
+                              Color.fromARGB(255, 0, 0, 0),
+                              Color.fromARGB(200, 0, 0, 0),
+                              Color.fromARGB(150, 0, 0, 0),
+                              Color.fromARGB(0, 73, 73, 73)
                             ],
                           ),
                         ),
@@ -244,6 +245,7 @@ Widget getCharacterData(
                             style: const TextStyle(
                                 fontSize: 20,
                                 color: Colors.white,
+                                fontFamily: "Roboto",
                                 fontWeight: FontWeight.bold),
                           ),
                           Text(
