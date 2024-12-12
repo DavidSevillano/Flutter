@@ -192,7 +192,7 @@ class _PeopleScreenState extends State<PeopleScreen> {
 
 Widget getCharacterData(
     String id, String name, String gender, String height, String mass) {
-  final Duration initialDelay = Duration(seconds: 1);
+  final Duration initialDelay = const Duration(seconds: 1);
 
   return Row(
     children: [
@@ -202,54 +202,78 @@ Widget getCharacterData(
             delay: initialDelay,
             child: Column(
               children: [
-                Container(
-                  width: 200,
+                SizedBox(
                   height: 320,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(30),
-                    image: DecorationImage(
-                      image: NetworkImage(
-                        "https://starwars-visualguide.com/assets/img/characters/$id.jpg",
+                  width: 200,
+                  child: Stack(
+                    children: [
+                      Container(
+                        width: 230,
+                        height: 350,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(30),
+                          image: DecorationImage(
+                            image: NetworkImage(
+                              "https://starwars-visualguide.com/assets/img/characters/$id.jpg",
+                            ),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
                       ),
-                      fit: BoxFit.cover,
-                    ),
+                      Container(
+                        padding: const EdgeInsets.all(5.0),
+                        alignment: Alignment.bottomCenter,
+                        decoration: const BoxDecoration(
+                          gradient: LinearGradient(
+                            begin: Alignment.bottomCenter,
+                            end: Alignment.topCenter,
+                            colors: <Color>[
+                              Colors.black,
+                              Colors.black12,
+                              Colors.black45
+                            ],
+                          ),
+                        ),
+                      ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "$name",
+                            style: const TextStyle(
+                                fontSize: 20,
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          Text(
+                            "Género: $gender",
+                            style: const TextStyle(
+                              fontSize: 16,
+                              color: Colors.white,
+                              fontFamily: "Roboto",
+                            ),
+                          ),
+                          Text(
+                            "Altura: $height cm",
+                            style: const TextStyle(
+                              fontSize: 16,
+                              color: Colors.white,
+                              fontFamily: "Roboto",
+                            ),
+                          ),
+                          Text(
+                            "Peso: $mass kg",
+                            style: const TextStyle(
+                              fontSize: 16,
+                              color: Colors.white,
+                              fontFamily: "Roboto",
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "$name",
-                      style: const TextStyle(
-                          fontSize: 20,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold),
-                    ),
-                    Text(
-                      "Género: $gender",
-                      style: const TextStyle(
-                        fontSize: 16,
-                        color: Colors.white,
-                        fontFamily: "Roboto",
-                      ),
-                    ),
-                    Text(
-                      "Altura: $height cm",
-                      style: const TextStyle(
-                        fontSize: 16,
-                        color: Colors.white,
-                        fontFamily: "Roboto",
-                      ),
-                    ),
-                    Text(
-                      "Peso: $mass kg",
-                      style: const TextStyle(
-                        fontSize: 16,
-                        color: Colors.white,
-                        fontFamily: "Roboto",
-                      ),
-                    ),
-                  ],
                 ),
               ],
             ),
