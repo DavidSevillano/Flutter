@@ -1,7 +1,9 @@
 import 'package:delayed_display/delayed_display.dart';
 import 'package:flutter/material.dart';
+import 'package:star_what/models/people_response/people.dart';
 import 'package:star_what/models/people_response/people_response.dart';
 import 'package:http/http.dart' as http;
+import 'package:star_what/screens/people_detail_screen.dart';
 
 class PeopleScreen extends StatefulWidget {
   const PeopleScreen({super.key});
@@ -178,113 +180,97 @@ class _PeopleScreenState extends State<PeopleScreen> {
         scrollDirection: Axis.horizontal,
         itemCount: peopleResponse.results!.length,
         itemBuilder: (context, index) {
-          final people = peopleResponse.results![index].url!;
-          final peopleId = people.split('/')[5];
-          final name = peopleResponse.results![index].name!;
-          final gender = peopleResponse.results![index].gender!;
-          final height = peopleResponse.results![index].height!;
-          final mass = peopleResponse.results![index].mass!;
-
-          return getCharacterData(peopleId, name, gender, height, mass);
+          return getCharacterData(context, peopleResponse.results![index]);
         });
   }
 }
 
-Widget getCharacterData(
-    String id, String name, String gender, String height, String mass) {
-  final Duration initialDelay = const Duration(seconds: 1);
+Widget getCharacterData(BuildContext context, People people) {
+  const Duration initialDelay = Duration(seconds: 1);
+  final url = people.url;
+  final id = url!.split('/')[5];
+  final name = people.name;
 
-  return Row(
-    children: [
-      Column(
-        children: [
-          DelayedDisplay(
-            delay: initialDelay,
-            child: Column(
-              children: [
-                SizedBox(
-                  height: 320,
-                  width: 200,
-                  child: Stack(
-                    children: [
-                      Container(
-                        width: 230,
-                        height: 350,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(30),
-                          image: DecorationImage(
-                            image: NetworkImage(
-                              "https://starwars-visualguide.com/assets/img/characters/$id.jpg",
-                            ),
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      ),
-                      Container(
-                        padding: const EdgeInsets.all(5.0),
-                        alignment: Alignment.bottomCenter,
-                        decoration: const BoxDecoration(
-                          gradient: LinearGradient(
-                            begin: Alignment.bottomCenter,
-                            end: Alignment.center,
-                            colors: <Color>[
-                              Color.fromARGB(255, 0, 0, 0),
-                              Color.fromARGB(200, 0, 0, 0),
-                              Color.fromARGB(150, 0, 0, 0),
-                              Color.fromARGB(0, 73, 73, 73)
-                            ],
-                          ),
-                        ),
-                      ),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "$name",
-                            style: const TextStyle(
-                                fontSize: 20,
-                                color: Colors.white,
-                                fontFamily: "Roboto",
-                                fontWeight: FontWeight.bold),
-                          ),
-                          Text(
-                            "Género: $gender",
-                            style: const TextStyle(
-                              fontSize: 16,
-                              color: Colors.white,
-                              fontFamily: "Roboto",
-                            ),
-                          ),
-                          Text(
-                            "Altura: $height cm",
-                            style: const TextStyle(
-                              fontSize: 16,
-                              color: Colors.white,
-                              fontFamily: "Roboto",
-                            ),
-                          ),
-                          Text(
-                            "Peso: $mass kg",
-                            style: const TextStyle(
-                              fontSize: 16,
-                              color: Colors.white,
-                              fontFamily: "Roboto",
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
+  return GestureDetector(
+    onTap: () {
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => PeopleDetailScreen(
+            peopleItem: people,
           ),
-        ],
-      ),
-      const SizedBox(
-        width: 20,
-      )
-    ],
+        ),
+      );
+    },
+    child: Row(
+      children: [
+        Column(
+          children: [
+            DelayedDisplay(
+              delay: initialDelay,
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: 320,
+                    width: 200,
+                    child: Stack(
+                      children: [
+                        Container(
+                          width: 230,
+                          height: 350,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(30),
+                            image: DecorationImage(
+                              image: NetworkImage(
+                                "https://starwars-visualguide.com/assets/img/characters/$id.jpg",
+                              ),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                        Container(
+                          padding: const EdgeInsets.all(5.0),
+                          alignment: Alignment.bottomCenter,
+                          decoration: const BoxDecoration(
+                            gradient: LinearGradient(
+                              begin: Alignment.bottomCenter,
+                              end: Alignment.center,
+                              colors: <Color>[
+                                Color.fromARGB(255, 0, 0, 0),
+                                Color.fromARGB(200, 0, 0, 0),
+                                Color.fromARGB(150, 0, 0, 0),
+                                Color.fromARGB(0, 73, 73, 73)
+                              ],
+                            ),
+                          ),
+                        ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Center(
+                              child: Text(
+                                "$name",
+                                style: const TextStyle(
+                                    fontSize: 20,
+                                    color: Colors.white,
+                                    fontFamily: "Roboto",
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                            SizedBox(height: 20)
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(
+          width: 20,
+        )
+      ],
+    ),
   );
 }
