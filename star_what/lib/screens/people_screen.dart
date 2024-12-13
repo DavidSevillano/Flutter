@@ -186,7 +186,7 @@ class _PeopleScreenState extends State<PeopleScreen> {
 }
 
 Widget getCharacterData(BuildContext context, People people) {
-  const Duration initialDelay = Duration(seconds: 1);
+  const Duration initialDelay = Duration(milliseconds: 500);
   final url = people.url;
   final id = url!.split('/')[5];
   final name = people.name;
@@ -209,7 +209,21 @@ Widget getCharacterData(BuildContext context, People people) {
               delay: initialDelay,
               child: Column(
                 children: [
-                  SizedBox(
+                  Container(
+                    padding: const EdgeInsets.all(5.0),
+                    alignment: Alignment.bottomCenter,
+                    decoration: const BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.bottomCenter,
+                        end: Alignment.center,
+                        colors: <Color>[
+                          Color.fromARGB(255, 0, 0, 0),
+                          Color.fromARGB(200, 0, 0, 0),
+                          Color.fromARGB(150, 0, 0, 0),
+                          Color.fromARGB(0, 73, 73, 73)
+                        ],
+                      ),
+                    ),
                     height: 320,
                     width: 200,
                     child: Stack(
